@@ -1,13 +1,16 @@
 <template>
-	<view>
-    hello uni-app
-    <text class="iconfont iconlike"></text>
+	<view class="index">
+    <musichead title="网易云音乐"></musichead>
 	</view>
 </template>
 
 <script>
   import '@/common/iconfont.css';
+  import musichead from '@/components/musichead/musichead.vue'
 	export default {
+    components: {
+      musichead
+    },
 		data() {
 			return {
 			}
@@ -21,6 +24,8 @@
 	}
 </script>
 
-<style>
-
+<style scoped>
+.index {
+  
+}
 </style>
