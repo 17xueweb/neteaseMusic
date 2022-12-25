@@ -1,6 +1,6 @@
 <template>
 	<view class="index">
-    <musichead title="网易云音乐"></musichead>
+    <musichead title="网易云音乐" :icon="false"></musichead>
 	</view>
 </template>
 

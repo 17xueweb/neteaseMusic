@@ -1,7 +1,7 @@
 <template>
   <view class="music-head">
-    <view class="music-head-icon">
-      <text class="iconfont iconzuojiantou-copy"></text> | <text class="iconfont iconshouye"></text>
+    <view v-if="icon" class="music-head-icon">
+      <text class="iconfont iconzuojiantou-copy" @tap="handleToBack"></text> | <text class="iconfont iconshouye" @tap="handleToHome"></text>
     </view>
     {{title}}
   </view>
@@ -10,11 +10,21 @@
 <script>
   export default {
     name:"musichead",
-    props: ['title'],
+    props: ['title', 'icon'],
     data() {
       return {
         
       };
+    },
+    methods: {
+      handleToBack() {
+        uni.navigateBack()
+      },
+      handleToHome() {
+        uni.navigateTo({
+          url: "/pages/index/index"
+        })
+      }
     }
   }
 </script>
