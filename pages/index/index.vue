@@ -8,7 +8,7 @@
           <input type="text" placeholder="搜索歌曲" />
         </view>
         <view class="index-list">
-          <view class="index-list-item">
+   <!--       <view class="index-list-item">
             <view class="index-list-img">
               <image src="../../static/wangyiyunyinyue.png"></image>
               <text>每天更新</text>
@@ -24,8 +24,8 @@
                 1.与我无关 - 阿如
               </view>
             </view>
-          </view>
-          <view class="index-list-item">
+          </view> -->
+     <!--     <view class="index-list-item">
             <view class="index-list-img">
               <image src="../../static/wangyiyunyinyue.png"></image>
               <text>每天更新</text>
@@ -41,21 +41,15 @@
                 1.与我无关 - 阿如
               </view>
             </view>
-          </view>
-          <view class="index-list-item">
+          </view> -->
+          <view class="index-list-item" v-for="(item, index) in topList" :key="index">
             <view class="index-list-img">
-              <image src="../../static/wangyiyunyinyue.png"></image>
-              <text>每天更新</text>
+              <image :src="item.coverImgUrl"></image>
+              <text>{{item.updateFrequency}}</text>
             </view>
             <view class="index-list-text">
-              <view class="">
-                1.与我无关 - 阿如
-              </view>
-              <view class="">
-                1.与我无关 - 阿如
-              </view>
-              <view class="">
-                1.与我无关 - 阿如
+              <view v-for="(item, index) in item.tracks" :key="index">
+                {{index+1}}.{{item.first}} - {{item.second}}
               </view>
             </view>
           </view>
@@ -68,16 +62,23 @@
 <script>
   import '@/common/iconfont.css';
   import musichead from '@/components/musichead/musichead.vue'
+  import { topList } from '../../common/api.js'
 	export default {
     components: {
       musichead
     },
 		data() {
 			return {
+        topList: []
 			}
 		},
 		onLoad() {
-
+      topList().then((res) => {
+        if(res.length) {
+          this.topList = res
+        }
+        console.log(res);
+      })
 		},
 		methods: {
 
