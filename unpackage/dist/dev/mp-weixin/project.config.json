@@ -21,7 +21,31 @@
     "libVersion": "2.29.0",
     "appid": "wxf0ef8ae44c313e61",
     "projectname": "neteaseMusic",
-    "condition": {},
+    "condition": {
+        "search": {
+            "current": -1,
+            "list": []
+        },
+        "conversation": {
+            "current": -1,
+            "list": []
+        },
+        "game": {
+            "current": -1,
+            "list": []
+        },
+        "miniprogram": {
+            "current": 0,
+            "list": [
+                {
+                    "name": "list",
+                    "query": "listId=3",
+                    "id": 0,
+                    "pathName": "pages/list/list"
+                }
+            ]
+        }
+    },
     "editorSetting": {
         "tabIndent": "insertSpaces",
         "tabSize": 4
