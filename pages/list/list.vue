@@ -28,7 +28,59 @@
         </button>
         <!-- #endif -->
         <view class="list-music">
-          
+          <view class="list-music-head">
+            <text class="iconfont iconbofang1"></text>
+            <text>播放全部</text>
+            <text>(共100首)</text>
+          </view>
+          <view class="list-music-item">
+            <view class="list-music-top">
+              1
+            </view>
+            <view class="list-music-song">
+              <view class="">
+                与我无关
+              </view>
+              <view class="">
+                <image src="../../static/dujia.png"></image>
+                <image src="../../static/sq.png"></image>
+                阿冗 - 与我无关
+              </view>
+            </view>
+            <text class="iconfont iconbofang"></text>
+          </view>
+          <view class="list-music-item">
+            <view class="list-music-top">
+              1
+            </view>
+            <view class="list-music-song">
+              <view class="">
+                与我无关
+              </view>
+              <view class="">
+                <image src="../../static/dujia.png"></image>
+                <image src="../../static/sq.png"></image>
+                阿冗 - 与我无关
+              </view>
+            </view>
+            <text class="iconfont iconbofang"></text>
+          </view>
+          <view class="list-music-item">
+            <view class="list-music-top">
+              1
+            </view>
+            <view class="list-music-song">
+              <view class="">
+                与我无关
+              </view>
+              <view class="">
+                <image src="../../static/dujia.png"></image>
+                <image src="../../static/sq.png"></image>
+                阿冗 - 与我无关
+              </view>
+            </view>
+            <text class="iconfont iconbofang"></text>
+          </view>
         </view>
       </scroll-view>
     </view>
