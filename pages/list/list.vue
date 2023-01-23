@@ -22,6 +22,14 @@
             </view>
           </view>
         </view>
+        <!-- #ifdef MP-WEIXIN -->
+        <button class="list-share" open-type="share">
+          <text  class="iconfont iconicon-"></text>分享给微信好友
+        </button>
+        <!-- #endif -->
+        <view class="list-music">
+          
+        </view>
       </scroll-view>
     </view>
   </view>
@@ -93,5 +101,19 @@
 .list-head-text view:nth-child(3) {
   line-height: 34rpx;
   font-size: 22rpx;
+}
+.list-share {
+  width: 330rpx;
+  height: 74rpx;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 37rpx;
+  color: white;
+  text-align: center;
+  line-height: 74rpx;
+  font-size: 28rpx;
+}
+.list-share text {
+  margin-right: 16rpx;
 }
 </style>

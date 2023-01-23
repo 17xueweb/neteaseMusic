@@ -132,4 +132,18 @@
   line-height: 34rpx;
   font-size: 22rpx;
 }
+.list-share.data-v-7d5e07c6 {
+  width: 330rpx;
+  height: 74rpx;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 37rpx;
+  color: white;
+  text-align: center;
+  line-height: 74rpx;
+  font-size: 28rpx;
+}
+.list-share text.data-v-7d5e07c6 {
+  margin-right: 16rpx;
+}
 
