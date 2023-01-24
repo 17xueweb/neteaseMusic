@@ -1,24 +1,24 @@
 <template>
   <view class="list">
-    <view class="fixbg">
+    <view class="fixbg" :style="{ 'background-image': 'url('+playlist.coverImgUrl+')'}">
     </view>
     <musichead title="歌单" :icon="true" color="white"></musichead>
     <view class="container">
       <scroll-view scroll-y="true">
         <view class="list-head">
           <view class="list-head-img">
-            <image src="../../static/wangyiyunyinyue.png"></image>
-            <text class="iconfont iconyousanjiao">30亿</text>
+            <image :src="playlist.coverImgUrl"></image>
+            <text class="iconfont iconyousanjiao">{{playlist.playCount}}</text>
           </view>
           <view class="list-head-text">
             <view class="">
-              测试文字
+              {{playlist.name}}
             </view>
             <view class="">
-              <image src="../../static/wangyiyunyinyue.png"></image>测试文字
+              <image :src="playlist.creator.avatarUrl"></image>{{ playlist.creator.nickname }}
             </view>
             <view class="">
-              测试文字测试文字测试文字
+              {{playlist.description}}
             </view>
           </view>
         </view>
@@ -90,14 +90,26 @@
 <script>
   import musichead from '@/components/musichead/musichead.vue'
   import '@/common/iconfont.css';
+  import { list } from '../../common/api.js'
   export default {
     data() {
       return {
-        
+        playlist: {
+          coverImgUrl: '',
+          creator: {
+            avatarUrl: ''
+          }
+        }
       }
     },
     onLoad(options) {
       console.log(options.listId);
+      list(options.listId).then((res) => {
+        if(res[1].data.code === 200) {
+          this.playlist = res[1].data.playlist
+          
+        }
+      })
     },
     methods: {
       

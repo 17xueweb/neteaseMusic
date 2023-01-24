@@ -240,7 +240,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 var _musichead = _interopRequireDefault(__webpack_require__(/*! @/components/musichead/musichead.vue */ 29));
-__webpack_require__(/*! @/common/iconfont.css */ 18);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+__webpack_require__(/*! @/common/iconfont.css */ 18);
+var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
 //
@@ -329,7 +330,7 @@ __webpack_require__(/*! @/common/iconfont.css */ 18);function _interopRequireDef
 //
 //
 //
-var _default = { data: function data() {return {};}, onLoad: function onLoad(options) {console.log(options.listId);}, methods: {} };exports.default = _default;
+var _default = { data: function data() {return { playlist: { coverImgUrl: '', creator: { avatarUrl: '' } } };}, onLoad: function onLoad(options) {var _this = this;console.log(options.listId);(0, _api.list)(options.listId).then(function (res) {if (res[1].data.code === 200) {_this.playlist = res[1].data.playlist;}});}, methods: {} };exports.default = _default;
 
 /***/ }),
 /* 29 */

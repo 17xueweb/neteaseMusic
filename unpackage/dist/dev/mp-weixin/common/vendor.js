@@ -9254,7 +9254,7 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;var _config = __webpack_require__(/*! ./config.js */ 20);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;var _config = __webpack_require__(/*! ./config.js */ 20);
 
 function topList() {
   var listIds = ['19723756', '3779629', '2884035', '3778678'];
@@ -9276,6 +9276,13 @@ function topList() {
       complete: function complete() {} });
 
   });
+}
+
+function list(listId) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/playlist/detail?id=").concat(listId),
+    method: 'GET' });
+
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
