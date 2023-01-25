@@ -191,7 +191,6 @@
   text-overflow: ellipsis;
 }
 .list-music-song view.data-v-7d5e07c6:nth-child(2) {
-  display: flex;
   font-size: 20rpx;
   align-items: center;
   width: 70vw;
@@ -200,8 +199,6 @@
   text-overflow: ellipsis;
 }
 .list-music-song view:nth-child(2) image.data-v-7d5e07c6 {
-  /* 不让图片拉伸 */
-  flex-shrink: 0;
   width: 32rpx;
   height: 20rpx;
   margin-right: 10rpx;

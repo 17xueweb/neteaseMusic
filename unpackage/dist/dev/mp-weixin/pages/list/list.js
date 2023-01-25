@@ -118,6 +118,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var f0 = _vm._f("formatCount")(_vm.playlist.playCount)
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        f0: f0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -149,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -266,7 +276,8 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopR
 //
 //
 //
-var _default = { data: function data() {return { playlist: { coverImgUrl: '', creator: { avatarUrl: '' }, trackCount: '' }, privileges: [] };}, onLoad: function onLoad(options) {var _this = this;console.log(options.listId);(0, _api.list)(options.listId).then(function (res) {if (res[1].data.code === 200) {_this.playlist = res[1].data.playlist;_this.privileges = res[1].data.privileges;}});}, methods: {} };exports.default = _default;
+var _default = { data: function data() {return { playlist: { coverImgUrl: '', creator: { avatarUrl: '' }, trackCount: '' }, privileges: [], isLoading: true };}, onLoad: function onLoad(options) {var _this = this;console.log(options.listId);uni.showLoading({ title: '加载中...' });(0, _api.list)(options.listId).then(function (res) {if (res[1].data.code === 200) {_this.playlist = res[1].data.playlist;_this.privileges = res[1].data.privileges;_this.isLoading = false;uni.hideLoading();}});}, methods: {} };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 29 */

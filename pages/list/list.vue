@@ -3,12 +3,12 @@
     <view class="fixbg" :style="{ 'background-image': 'url('+playlist.coverImgUrl+')'}">
     </view>
     <musichead title="歌单" :icon="true" color="white"></musichead>
-    <view class="container">
+    <view class="container" v-show="!isLoading">
       <scroll-view scroll-y="true">
         <view class="list-head">
           <view class="list-head-img">
             <image :src="playlist.coverImgUrl"></image>
-            <text class="iconfont iconyousanjiao">{{playlist.playCount}}</text>
+            <text class="iconfont iconyousanjiao">{{playlist.playCount | formatCount }}</text>
           </view>
           <view class="list-head-text">
             <view class="">
@@ -69,15 +69,21 @@
           },
           trackCount: ''
         },
-        privileges: []
+        privileges: [],
+        isLoading: true
       }
     },
     onLoad(options) {
       console.log(options.listId);
+      uni.showLoading({
+        title: '加载中...'
+      });
       list(options.listId).then((res) => {
         if(res[1].data.code === 200) {
           this.playlist = res[1].data.playlist
           this.privileges = res[1].data.privileges
+          this.isLoading = false
+          uni.hideLoading()
         }
       })
     },
@@ -197,7 +203,6 @@
   text-overflow: ellipsis;
 }
 .list-music-song view:nth-child(2) {
-  display: flex;
   font-size: 20rpx;
   align-items: center;
   width: 70vw;
@@ -206,8 +211,6 @@
   text-overflow: ellipsis;
 }
 .list-music-song view:nth-child(2) image {
-  /* 不让图片拉伸 */
-  flex-shrink: 0;
   width: 32rpx;
   height: 20rpx;
   margin-right: 10rpx;
