@@ -31,52 +31,20 @@
           <view class="list-music-head">
             <text class="iconfont iconbofang1"></text>
             <text>播放全部</text>
-            <text>(共100首)</text>
+            <text>(共{{playlist.trackCount}}首)</text>
           </view>
-          <view class="list-music-item">
+          <view class="list-music-item" v-for="(item, index) in playlist.tracks"  :key="index">
             <view class="list-music-top">
-              1
+              {{index + 1}}
             </view>
             <view class="list-music-song">
               <view class="">
-                与我无关
+                {{item.name}}
               </view>
               <view class="">
-                <image src="../../static/dujia.png"></image>
-                <image src="../../static/sq.png"></image>
-                阿冗 - 与我无关
-              </view>
-            </view>
-            <text class="iconfont iconbofang"></text>
-          </view>
-          <view class="list-music-item">
-            <view class="list-music-top">
-              1
-            </view>
-            <view class="list-music-song">
-              <view class="">
-                与我无关
-              </view>
-              <view class="">
-                <image src="../../static/dujia.png"></image>
-                <image src="../../static/sq.png"></image>
-                阿冗 - 与我无关
-              </view>
-            </view>
-            <text class="iconfont iconbofang"></text>
-          </view>
-          <view class="list-music-item">
-            <view class="list-music-top">
-              1
-            </view>
-            <view class="list-music-song">
-              <view class="">
-                与我无关
-              </view>
-              <view class="">
-                <image src="../../static/dujia.png"></image>
-                <image src="../../static/sq.png"></image>
-                阿冗 - 与我无关
+                <image v-if="privileges[index].flag > 60 && privileges[index].flag < 70" src="../../static/dujia.png"></image>
+                <image v-if="privileges[index].maxbr == 999000" src="../../static/sq.png"></image>
+                {{ item.ar[0].name}} - {{ item.name }}
               </view>
             </view>
             <text class="iconfont iconbofang"></text>
@@ -98,8 +66,10 @@
           coverImgUrl: '',
           creator: {
             avatarUrl: ''
-          }
-        }
+          },
+          trackCount: ''
+        },
+        privileges: []
       }
     },
     onLoad(options) {
@@ -107,7 +77,7 @@
       list(options.listId).then((res) => {
         if(res[1].data.code === 200) {
           this.playlist = res[1].data.playlist
-          
+          this.privileges = res[1].data.privileges
         }
       })
     },
@@ -221,14 +191,23 @@
 .list-music-song view:nth-child(1) {
   font-size: 28rpx;
   color: black;
+  width: 70vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .list-music-song view:nth-child(2) {
   display: flex;
   font-size: 20rpx;
   align-items: center;
-  
+  width: 70vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .list-music-song view:nth-child(2) image {
+  /* 不让图片拉伸 */
+  flex-shrink: 0;
   width: 32rpx;
   height: 20rpx;
   margin-right: 10rpx;
