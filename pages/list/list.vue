@@ -33,7 +33,7 @@
             <text>播放全部</text>
             <text>(共{{playlist.trackCount}}首)</text>
           </view>
-          <view class="list-music-item" v-for="(item, index) in playlist.tracks"  :key="index">
+          <view class="list-music-item" v-for="(item, index) in playlist.tracks"  :key="index" @tap="handleToDetail(item.id)">
             <view class="list-music-top">
               {{index + 1}}
             </view>
@@ -88,7 +88,11 @@
       })
     },
     methods: {
-      
+      handleToDetail(songId) {
+        uni.navigateTo({
+          url: '/pages/detail/detail?songId=' + songId
+        });
+      }
     }
   }
 </script>

@@ -1,0 +1,1 @@
+<view class="detail"><view class="fixbg" style="{{'background-image:'+('url(/static/wangyiyunyinyue.png)')+';'}}"></view><musichead vue-id="3db16520-1" title="歌单" icon="{{true}}" color="white" bind:__l="__l"></musichead><view class="container"><scroll-view scroll-y="true"></scroll-view></view></view>
