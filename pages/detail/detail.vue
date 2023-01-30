@@ -7,8 +7,19 @@
         <view class="detail-play">
           <image src="../../static/logo.png"></image>
           <text class="iconfont iconpause"></text>
-          <view class="">
-            
+          <view></view>
+        </view>
+        <view class="detail-lyric">
+          <view class="detail-lyric-wrap">
+            <view class="detail-lyric-item">
+              测试文字测试文字测试文字
+            </view>
+            <view class="detail-lyric-item active">
+              测试文字测试
+            </view>
+            <view class="detail-lyric-item">
+              测试文字测试文字测试文字
+            </view>
           </view>
         </view>
       </scroll-view>
@@ -77,4 +88,24 @@
   margin: auto;
   background-size: cover;
 }
+.detail-lyric {
+  font-size: 32rpx;
+  line-height: 82rpx;
+  height: 246rpx;
+  text-align: center;
+  overflow: hidden;
+  color: #6f6e73;
+}
+.detail-lyric-wrap {
+  
+}
+.detail-lyric-item {
+  height: 82rpx;
+  
+}
+.detail-lyric-item.active {
+  color: white;
+  
+}
+
 </style>

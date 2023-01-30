@@ -127,4 +127,21 @@
   margin: auto;
   background-size: cover;
 }
+.detail-lyric.data-v-3e159eb4 {
+  font-size: 32rpx;
+  line-height: 82rpx;
+  height: 246rpx;
+  text-align: center;
+  overflow: hidden;
+  color: #6f6e73;
+}
+.detail-lyric-wrap.data-v-3e159eb4 {
+}
+.detail-lyric-item.data-v-3e159eb4 {
+  height: 82rpx;
+}
+.detail-lyric-item.active.data-v-3e159eb4 {
+  color: white;
+}
+
 
