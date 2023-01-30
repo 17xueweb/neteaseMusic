@@ -31,7 +31,7 @@
     top: 0;
     background-size: cover;
     background-position: center 0;
-    filter: blur(10px);
+    filter: blur(20px);
     transform: scale(1.2);
   }
 </style>

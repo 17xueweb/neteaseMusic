@@ -22,6 +22,53 @@
             </view>
           </view>
         </view>
+        <view class="detail-like">
+          <view class="detail-like-head">
+            喜欢这首歌的人也听
+          </view>
+          <view class="detail-like-item">
+            <view class="detail-like-img">
+              <image src="../../static/logo.png"></image>
+            </view>
+            <view class="detail-like-song">
+              <view>蓝</view>
+              <view class="">
+                <image src="../../static/dujia.png"></image>
+                <image src="../../static/sq.png"></image>
+                石白其 - 蓝
+              </view>
+            </view>
+            <text class="iconfont iconbofang"></text>
+          </view>
+          <view class="detail-like-item">
+            <view class="detail-like-img">
+              <image src="../../static/logo.png"></image>
+            </view>
+            <view class="detail-like-song">
+              <view>蓝</view>
+              <view class="">
+                <image src="../../static/dujia.png"></image>
+                <image src="../../static/sq.png"></image>
+                石白其 - 蓝
+              </view>
+            </view>
+            <text class="iconfont iconbofang"></text>
+          </view>
+          <view class="detail-like-item">
+            <view class="detail-like-img">
+              <image src="../../static/logo.png"></image>
+            </view>
+            <view class="detail-like-song">
+              <view>蓝</view>
+              <view class="">
+                <image src="../../static/dujia.png"></image>
+                <image src="../../static/sq.png"></image>
+                石白其 - 蓝
+              </view>
+            </view>
+            <text class="iconfont iconbofang"></text>
+          </view>
+        </view>
       </scroll-view>
       </view>
   </view>
@@ -101,11 +148,55 @@
 }
 .detail-lyric-item {
   height: 82rpx;
-  
 }
 .detail-lyric-item.active {
   color: white;
+}
+.detail-like {
+  margin: 0 30rpx;
+}
+.detail-like-head {
+  font-size: 36rpx;
+  color: white;
+  margin: 50rpx 0;
   
+}
+.detail-like-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28rpx;
+}
+.detail-like-img {
+  width: 82rpx;
+  height: 82rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+.detail-like-img image {
+  width: 100%;
+  height: 100%;
+}
+.detail-like-song {
+  flex: 1;
+  color: #c6c2bf;
+}
+.detail-like-song view:nth-child(1) {
+  font-size: 28rpx;
+  color: white;
+  margin-bottom: 12rpx;
+}
+.detail-like-song view:nth-child(1) {
+  font-size: 22rpx;
+}
+.detail-like-song image{
+  width: 26rpx;
+  height: 20rpx;
+  margin-right: 10rpx;
+}
+.detail-like-item text {
+  font-size: 50rpx;
+  color: #c6c2bf;
 }
 
 </style>
