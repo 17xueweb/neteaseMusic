@@ -26,44 +26,16 @@
           <view class="detail-like-head">
             喜欢这首歌的人也听
           </view>
-          <view class="detail-like-item">
+          <view class="detail-like-item" v-for="(item, index) in songSimi" :key="index">
             <view class="detail-like-img">
-              <image src="../../static/logo.png"></image>
+              <image :src="item.album.picUrl"></image>
             </view>
             <view class="detail-like-song">
-              <view>蓝</view>
+              <view>{{item.name}}</view>
               <view class="">
-                <image src="../../static/dujia.png"></image>
-                <image src="../../static/sq.png"></image>
-                石白其 - 蓝
-              </view>
-            </view>
-            <text class="iconfont iconbofang"></text>
-          </view>
-          <view class="detail-like-item">
-            <view class="detail-like-img">
-              <image src="../../static/logo.png"></image>
-            </view>
-            <view class="detail-like-song">
-              <view>蓝</view>
-              <view class="">
-                <image src="../../static/dujia.png"></image>
-                <image src="../../static/sq.png"></image>
-                石白其 - 蓝
-              </view>
-            </view>
-            <text class="iconfont iconbofang"></text>
-          </view>
-          <view class="detail-like-item">
-            <view class="detail-like-img">
-              <image src="../../static/logo.png"></image>
-            </view>
-            <view class="detail-like-song">
-              <view>蓝</view>
-              <view class="">
-                <image src="../../static/dujia.png"></image>
-                <image src="../../static/sq.png"></image>
-                石白其 - 蓝
+                <image v-if="item.privilege.flag > 60 && item.privilege.flag < 70" src="../../static/dujia.png"></image>
+                <image v-if="item.privilege.maxbr == 999000" src="../../static/sq.png"></image>
+                {{item.album.artists[0].name}} -{{item.name}}
               </view>
             </view>
             <text class="iconfont iconbofang"></text>
@@ -98,55 +70,6 @@
             </view>
           </view>
           
-          <view class="detail-comment-item">
-            <view class="detail-comment-img">
-              <image src="../../static/logo.png"></image>
-            </view>
-            <view class="detail-comment-content">
-              <view class="detail-comment-title">
-                <view class="detail-comment-name">
-                  <view>
-                    阿容的容
-                  </view>
-                  <view>
-                    2022年2月1
-                  </view>
-                </view>
-                <view class="detail-comment-like">
-                  56027
-                  <text class="iconfont iconlike"></text>
-                </view>
-              </view>
-              <view class="detail-comment-text">
-                测试文字测试文字测试文字测试文字测试文字测试文字测试文字
-              </view>
-            </view>
-          </view>
-          
-          <view class="detail-comment-item">
-            <view class="detail-comment-img">
-              <image src="../../static/logo.png"></image>
-            </view>
-            <view class="detail-comment-content">
-              <view class="detail-comment-title">
-                <view class="detail-comment-name">
-                  <view>
-                    阿容的容
-                  </view>
-                  <view>
-                    2022年2月1
-                  </view>
-                </view>
-                <view class="detail-comment-like">
-                  56027
-                  <text class="iconfont iconlike"></text>
-                </view>
-              </view>
-              <view class="detail-comment-text">
-                测试文字测试文字测试文字测试文字测试文字测试文字测试文字
-              </view>
-            </view>
-          </view>
         </view>
       </scroll-view>
       </view>
@@ -162,7 +85,8 @@
       return {
         songDetail: {
           al: {}
-        }
+        },
+        songSimi: []
       }
     },
     onLoad(options) {
@@ -171,10 +95,13 @@
     },
     methods: {
       getMusic(songId) {
-        Promise.all([ songDetail(songId) ]).then((res) => {
-          if(res[0][1].statusCode === 200) {
+        Promise.all([ songDetail(songId), songSimi(songId) ]).then((res) => {
+          if(res[0][1].data.code === 200) {
             this.songDetail = res[0][1].data.songs[0]
             console.log(this.songDetail);
+          }
+          if(res[1][1].data.code === 200) {
+            this.songSimi = res[1][1].data.songs;
           }
         })
       }
