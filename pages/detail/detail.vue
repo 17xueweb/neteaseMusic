@@ -1,11 +1,11 @@
 <template>
   <view class="detail">
-    <view class="fixbg" :style="{ 'background-image': 'url(/static/wangyiyunyinyue.png)'}"></view>
-    <musichead title="歌单" :icon="true" color="white"></musichead>
+    <view class="fixbg" :style="{ 'background-image': 'url('+ songDetail.al.picUrl +')'}"></view>
+    <musichead :title="songDetail.name" :icon="true" color="white"></musichead>
     <view class="container">
       <scroll-view scroll-y="true">
         <view class="detail-play">
-          <image src="../../static/logo.png"></image>
+          <image :src="songDetail.al.picUrl"></image>
           <text class="iconfont iconpause"></text>
           <view></view>
         </view>
@@ -156,17 +156,28 @@
 <script>
   import musichead from '@/components/musichead/musichead.vue'
   import '@/common/iconfont.css';
+  import { songDetail, songSimi, songComment, songLyric, songUrl} from '../../common/api.js'
   export default {
     data() {
       return {
-        
+        songDetail: {
+          al: {}
+        }
       }
     },
     onLoad(options) {
-      console.log(options.songId);
+      // console.log(options.songId);
+      this.getMusic(options.songId)
     },
     methods: {
-      
+      getMusic(songId) {
+        Promise.all([ songDetail(songId) ]).then((res) => {
+          if(res[0][1].statusCode === 200) {
+            this.songDetail = res[0][1].data.songs[0]
+            console.log(this.songDetail);
+          }
+        })
+      }
     }
   }
 </script>

@@ -28,3 +28,40 @@ export function list(listId) {
     method: 'GET'
   });
 }
+
+// 2018145430
+export function songDetail(songId) {
+  return uni.request({
+    url: `${baseUrl}/song/detail?ids=${songId}`,
+    method: 'GET'
+  });
+}
+
+export function songSimi(songId) {
+  return uni.request({
+    url: `${baseUrl}/simi/song?id=${songId}`,
+    method: 'GET'
+  });
+}
+
+export function songComment(songId) {
+  return uni.request({
+    url: `${baseUrl}/comment/music?id=${songId}`,
+    method: 'GET'
+  });
+}
+
+export function songLyric(songId) {
+  return uni.request({
+    url: `${baseUrl}/lyric?id=${songId}`,
+    method: 'GET'
+  });
+}
+
+export function songUrl(songId) {
+  return uni.request({
+    url: `${baseUrl}/song/url?id=${songId}`,
+    method: 'GET'
+  });
+}
+

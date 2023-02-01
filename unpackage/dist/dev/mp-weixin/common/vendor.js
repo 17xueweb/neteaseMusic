@@ -9254,7 +9254,7 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;var _config = __webpack_require__(/*! ./config.js */ 20);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;exports.songDetail = songDetail;exports.songSimi = songSimi;exports.songComment = songComment;exports.songLyric = songLyric;exports.songUrl = songUrl;var _config = __webpack_require__(/*! ./config.js */ 20);
 
 function topList() {
   var listIds = ['19723756', '3779629', '2884035', '3778678'];
@@ -9281,6 +9281,42 @@ function topList() {
 function list(listId) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/playlist/detail?id=").concat(listId),
+    method: 'GET' });
+
+}
+
+// 2018145430
+function songDetail(songId) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/song/detail?ids=").concat(songId),
+    method: 'GET' });
+
+}
+
+function songSimi(songId) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/simi/song?id=").concat(songId),
+    method: 'GET' });
+
+}
+
+function songComment(songId) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/comment/music?id=").concat(songId),
+    method: 'GET' });
+
+}
+
+function songLyric(songId) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/lyric?id=").concat(songId),
+    method: 'GET' });
+
+}
+
+function songUrl(songId) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/song/url?id=").concat(songId),
     method: 'GET' });
 
 }

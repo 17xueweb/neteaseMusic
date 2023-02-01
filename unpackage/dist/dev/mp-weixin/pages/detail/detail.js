@@ -486,7 +486,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 var _musichead = _interopRequireDefault(__webpack_require__(/*! @/components/musichead/musichead.vue */ 29));
-__webpack_require__(/*! @/common/iconfont.css */ 18);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+__webpack_require__(/*! @/common/iconfont.css */ 18);
+var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
 //
@@ -641,7 +642,8 @@ __webpack_require__(/*! @/common/iconfont.css */ 18);function _interopRequireDef
 //
 //
 //
-var _default = { data: function data() {return {};}, onLoad: function onLoad(options) {console.log(options.songId);}, methods: {} };exports.default = _default;
+var _default = { data: function data() {return { songDetail: { al: {} } };}, onLoad: function onLoad(options) {// console.log(options.songId);
+    this.getMusic(options.songId);}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId)]).then(function (res) {if (res[0][1].statusCode === 200) {_this.songDetail = res[0][1].data.songs[0];console.log(_this.songDetail);}});} } };exports.default = _default;
 
 /***/ }),
 
