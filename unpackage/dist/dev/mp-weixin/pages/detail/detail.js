@@ -427,9 +427,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
 var _musichead = _interopRequireDefault(__webpack_require__(/*! @/components/musichead/musichead.vue */ 29));
 __webpack_require__(/*! @/common/iconfont.css */ 18);
 var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
@@ -507,11 +504,8 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopR
 //
 //
 //
-//
-//
-//
-var _default = { data: function data() {return { songDetail: { al: {} }, songSimi: [], songComment: [] };}, onLoad: function onLoad(options) {// console.log(options.songId);
-    this.getMusic(options.songId);}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];console.log(_this.songDetail);}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code === 200) {_this.songComment = res[2][1].data.hotComments;}});} } };exports.default = _default;
+var _default = { data: function data() {return { songDetail: { al: { picUrl: '' } }, songSimi: [], songComment: [], songLyric: [], lyricIndex: 0 };}, onLoad: function onLoad(options) {// console.log(options.songId);
+    this.getMusic(options.songId);}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId), (0, _api.songLyric)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];console.log(_this.songDetail);}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code === 200) {_this.songComment = res[2][1].data.hotComments;}if (res[3][1].data.code === 200) {var lyric = res[3][1].data.lrc.lyric;console.log(lyric);var re = /\[([^\]]+)\]([^\[]+)/g;var result = [];lyric.replace(re, function ($0, $1, $2) {result.push({ "time": _this.formatTimeToSec($1), "lyric": $2 });});_this.songLyric = result;console.log(result);}});}, formatTimeToSec: function formatTimeToSec(value) {var arr = value.split(':');return (Number(arr[0] * 60) + Number(arr[1])).toFixed(1);} } };exports.default = _default;
 
 /***/ }),
 

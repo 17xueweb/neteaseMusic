@@ -51,6 +51,7 @@ export function songComment(songId) {
   });
 }
 
+// http://localhost:3000/lyric?id=2018145430
 export function songLyric(songId) {
   return uni.request({
     url: `${baseUrl}/lyric?id=${songId}`,

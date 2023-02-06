@@ -11,14 +11,11 @@
         </view>
         <view class="detail-lyric">
           <view class="detail-lyric-wrap">
-            <view class="detail-lyric-item">
+<!--            <view class="detail-lyric-item">
               测试文字测试文字测试文字
-            </view>
-            <view class="detail-lyric-item active">
-              测试文字测试
-            </view>
-            <view class="detail-lyric-item">
-              测试文字测试文字测试文字
+            </view> -->
+            <view class="detail-lyric-item" :class="{active: lyricIndex === index}" v-for="(item, index) in songLyric" :key="index">
+              {{item.lyric }}
             </view>
           </view>
         </view>
@@ -84,10 +81,14 @@
     data() {
       return {
         songDetail: {
-          al: {}
+          al: {
+            picUrl: ''
+          }
         },
         songSimi: [],
-        songComment: []
+        songComment: [],
+        songLyric: [],
+        lyricIndex: 0
       }
     },
     onLoad(options) {
@@ -96,7 +97,7 @@
     },
     methods: {
       getMusic(songId) {
-        Promise.all([ songDetail(songId), songSimi(songId), songComment(songId) ]).then((res) => {
+        Promise.all([ songDetail(songId), songSimi(songId), songComment(songId), songLyric(songId) ]).then((res) => {
           if(res[0][1].data.code === 200) {
             this.songDetail = res[0][1].data.songs[0]
             console.log(this.songDetail);
@@ -107,7 +108,22 @@
           if(res[2][1].data.code === 200) {
             this.songComment = res[2][1].data.hotComments
           }
+          if(res[3][1].data.code === 200) {
+            let lyric = res[3][1].data.lrc.lyric
+            console.log(lyric);
+            let re = /\[([^\]]+)\]([^\[]+)/g;
+            var result = []
+            lyric.replace(re, ($0, $1, $2)=> {
+              result.push({ "time" : this.formatTimeToSec($1), "lyric" : $2})
+            })
+            this.songLyric = result
+            console.log(result);
+          }
         })
+      },
+      formatTimeToSec(value) {
+        let arr = value.split(':')
+        return (Number(arr[0]*60) + Number(arr[1])).toFixed(1)
       }
     }
   }
