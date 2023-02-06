@@ -296,6 +296,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.songComment, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f0 = _vm._f("formatTime")(item.time)
+
+    var f1 = _vm._f("formatCount")(item.likedCount)
+
+    return {
+      $orig: $orig,
+      f0: f0,
+      f1: f1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -488,8 +510,8 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopR
 //
 //
 //
-var _default = { data: function data() {return { songDetail: { al: {} }, songSimi: [] };}, onLoad: function onLoad(options) {// console.log(options.songId);
-    this.getMusic(options.songId);}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];console.log(_this.songDetail);}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}});} } };exports.default = _default;
+var _default = { data: function data() {return { songDetail: { al: {} }, songSimi: [], songComment: [] };}, onLoad: function onLoad(options) {// console.log(options.songId);
+    this.getMusic(options.songId);}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];console.log(_this.songDetail);}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code === 200) {_this.songComment = res[2][1].data.hotComments;}});} } };exports.default = _default;
 
 /***/ }),
 

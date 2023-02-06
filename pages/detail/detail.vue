@@ -45,27 +45,27 @@
           <view class="detail-comment-head">
             精彩评论
           </view>
-          <view class="detail-comment-item">
+          <view class="detail-comment-item" v-for="(item, index) in songComment" :key="index">
             <view class="detail-comment-img">
-              <image src="../../static/logo.png"></image>
+              <image :src="item.user.avatarUrl"></image>
             </view>
             <view class="detail-comment-content">
               <view class="detail-comment-title">
                 <view class="detail-comment-name">
                   <view>
-                    阿容的容
+                    {{item.user.nickname}}
                   </view>
                   <view>
-                    2022年2月1
+                    {{item.time | formatTime}}
                   </view>
                 </view>
                 <view class="detail-comment-like">
-                  56027
+                  {{item.likedCount | formatCount}}
                   <text class="iconfont iconlike"></text>
                 </view>
               </view>
               <view class="detail-comment-text">
-                测试文字测试文字测试文字测试文字测试文字测试文字测试文字
+                {{item.content}}
               </view>
             </view>
           </view>
@@ -86,7 +86,8 @@
         songDetail: {
           al: {}
         },
-        songSimi: []
+        songSimi: [],
+        songComment: []
       }
     },
     onLoad(options) {
@@ -95,13 +96,16 @@
     },
     methods: {
       getMusic(songId) {
-        Promise.all([ songDetail(songId), songSimi(songId) ]).then((res) => {
+        Promise.all([ songDetail(songId), songSimi(songId), songComment(songId) ]).then((res) => {
           if(res[0][1].data.code === 200) {
             this.songDetail = res[0][1].data.songs[0]
             console.log(this.songDetail);
           }
           if(res[1][1].data.code === 200) {
             this.songSimi = res[1][1].data.songs;
+          }
+          if(res[2][1].data.code === 200) {
+            this.songComment = res[2][1].data.hotComments
           }
         })
       }

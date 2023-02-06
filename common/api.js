@@ -43,7 +43,7 @@ export function songSimi(songId) {
     method: 'GET'
   });
 }
-
+// http://localhost:3000/comment/music?id=2018145430
 export function songComment(songId) {
   return uni.request({
     url: `${baseUrl}/comment/music?id=${songId}`,
