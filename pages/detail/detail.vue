@@ -112,7 +112,6 @@
         songUrl(songId)]).then((res) => {
           if(res[0][1].data.code === 200) {
             this.songDetail = res[0][1].data.songs[0]
-            console.log(this.songDetail);
           }
           if(res[1][1].data.code === 200) {
             this.songSimi = res[1][1].data.songs;
@@ -122,14 +121,12 @@
           }
           if(res[3][1].data.code === 200) {
             let lyric = res[3][1].data.lrc.lyric
-            console.log(lyric);
             let re = /\[([^\]]+)\]([^\[]+)/g;
             var result = []
             lyric.replace(re, ($0, $1, $2)=> {
               result.push({ "time" : this.formatTimeToSec($1), "lyric" : $2})
             })
             this.songLyric = result
-            console.log(result);
           }
           if(res[4][1].data.code === 200) {
             this.bgAudioManager = uni.getBackgroundAudioManager()
@@ -172,7 +169,6 @@
               this.lyricIndex = i
             }
           }
-          console.log(this.lyricIndex);
         }, 500)
       },
       cancelLyricIndex() {
