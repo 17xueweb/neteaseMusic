@@ -103,6 +103,34 @@
   right: 0;
   bottom: 0;
   margin: auto;
+  -webkit-animation: 10s linear move-data-v-3e159eb4 infinite;
+          animation: 10s linear move-data-v-3e159eb4 infinite;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+.detail-play .detail-play-run.data-v-3e159eb4 {
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+}
+@-webkit-keyframes move-data-v-3e159eb4 {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes move-data-v-3e159eb4 {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
 }
 .detail-play text.data-v-3e159eb4 {
   font-size: 100rpx;
