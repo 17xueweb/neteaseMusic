@@ -164,6 +164,7 @@ to {
   color: #6f6e73;
 }
 .detail-lyric-wrap.data-v-3e159eb4 {
+  transition: .5s;
 }
 .detail-lyric-item.data-v-3e159eb4 {
   height: 82rpx;

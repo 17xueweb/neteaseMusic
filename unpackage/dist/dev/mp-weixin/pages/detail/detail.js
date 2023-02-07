@@ -505,7 +505,32 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopR
 //
 //
 var _default = { data: function data() {return { songDetail: { al: { picUrl: '' } }, songSimi: [], songComment: [], songLyric: [], lyricIndex: 0, iconPlay: 'iconpause', isPlayRotate: true };}, onLoad: function onLoad(options) {// console.log(options.songId);
-    this.getMusic(options.songId);}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId), (0, _api.songLyric)(songId), (0, _api.songUrl)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];console.log(_this.songDetail);}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code === 200) {_this.songComment = res[2][1].data.hotComments;}if (res[3][1].data.code === 200) {var lyric = res[3][1].data.lrc.lyric;console.log(lyric);var re = /\[([^\]]+)\]([^\[]+)/g;var result = [];lyric.replace(re, function ($0, $1, $2) {result.push({ "time": _this.formatTimeToSec($1), "lyric": $2 });});_this.songLyric = result;console.log(result);}if (res[4][1].data.code === 200) {_this.bgAudioManager = uni.getBackgroundAudioManager();_this.bgAudioManager.title = _this.songDetail.name;_this.bgAudioManager.src = res[4][1].data.data[0].url || '';_this.bgAudioManager.onPlay(function () {_this.iconPlay = 'iconpause';_this.isPlayRotate = true;});_this.bgAudioManager.onPause(function () {_this.iconPlay = 'iconbofang1';_this.isPlayRotate = false;});}});}, formatTimeToSec: function formatTimeToSec(value) {var arr = value.split(':');return (Number(arr[0] * 60) + Number(arr[1])).toFixed(1);}, handleToPlay: function handleToPlay() {if (this.bgAudioManager.paused) {this.bgAudioManager.play();} else {this.bgAudioManager.pause();}} } };exports.default = _default;
+    this.getMusic(options.songId);}, onUnload: function onUnload() {this.cancelLyricIndex();}, onHide: function onHide() {this.cancelLyricIndex();}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId), (0, _api.songLyric)(songId), (0, _api.songUrl)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];console.log(_this.songDetail);}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code === 200) {_this.songComment = res[2][1].data.hotComments;}if (res[3][1].data.code === 200) {var lyric = res[3][1].data.lrc.lyric;console.log(lyric);var re = /\[([^\]]+)\]([^\[]+)/g;var result = [];lyric.replace(re, function ($0, $1, $2) {result.push({ "time": _this.formatTimeToSec($1), "lyric": $2 });});_this.songLyric = result;console.log(result);}if (res[4][1].data.code === 200) {_this.bgAudioManager = uni.getBackgroundAudioManager();_this.bgAudioManager.title = _this.songDetail.name;_this.bgAudioManager.src = res[4][1].data.data[0].url || '';_this.listenLyricIndex();_this.bgAudioManager.onPlay(function () {_this.iconPlay = 'iconpause';_this.isPlayRotate = true;_this.listenLyricIndex();});_this.bgAudioManager.onPause(function () {_this.iconPlay = 'iconbofang1';_this.isPlayRotate = false;_this.cancelLyricIndex();});}});}, formatTimeToSec: function formatTimeToSec(value) {var arr = value.split(':');return (Number(arr[0] * 60) + Number(arr[1])).toFixed(1);},
+    handleToPlay: function handleToPlay() {
+      if (this.bgAudioManager.paused) {
+        this.bgAudioManager.play();
+      } else {
+        this.bgAudioManager.pause();
+      }
+    },
+    listenLyricIndex: function listenLyricIndex() {var _this2 = this;
+      clearInterval(this.timer);
+      this.timer = setInterval(function () {
+        for (var i = 0; i < _this2.songLyric.length; i++) {
+          if (_this2.bgAudioManager.currentTime > _this2.songLyric[_this2.songLyric.length - 1].time) {
+            _this2.lyricIndex = _this2.songLyric.length - 1;
+            break;
+          }
+          if (_this2.bgAudioManager.currentTime > _this2.songLyric[i].time && _this2.bgAudioManager.currentTime < _this2.songLyric[i + 1].time) {
+            _this2.lyricIndex = i;
+          }
+        }
+        console.log(_this2.lyricIndex);
+      }, 500);
+    },
+    cancelLyricIndex: function cancelLyricIndex() {
+      clearInterval(this.timer);
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

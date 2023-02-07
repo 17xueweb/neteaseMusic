@@ -10,7 +10,7 @@
           <view></view>
         </view>
         <view class="detail-lyric">
-          <view class="detail-lyric-wrap">
+          <view class="detail-lyric-wrap" :style="{ transform : 'translateY('+ -(lyricIndex - 1) * 72 +'rpx)'}">
 <!--            <view class="detail-lyric-item">
               测试文字测试文字测试文字
             </view> -->
@@ -97,6 +97,12 @@
       // console.log(options.songId);
       this.getMusic(options.songId)
     },
+    onUnload() {
+      this.cancelLyricIndex()
+    },
+    onHide() {
+      this.cancelLyricIndex()
+    },
     methods: {
       getMusic(songId) {
         Promise.all([ songDetail(songId), 
@@ -129,13 +135,16 @@
             this.bgAudioManager = uni.getBackgroundAudioManager()
             this.bgAudioManager.title = this.songDetail.name
             this.bgAudioManager.src = res[4][1].data.data[0].url || ''
+            this.listenLyricIndex()
             this.bgAudioManager.onPlay(() => {
               this.iconPlay = 'iconpause'
               this.isPlayRotate = true
+              this.listenLyricIndex()
             })
             this.bgAudioManager.onPause(() => {
               this.iconPlay = 'iconbofang1'
               this.isPlayRotate = false
+              this.cancelLyricIndex()
             })
           }
         })
@@ -150,6 +159,24 @@
         }else {
           this.bgAudioManager.pause()
         }
+      },
+      listenLyricIndex() {
+        clearInterval(this.timer)
+        this.timer = setInterval(() => {
+          for(var i = 0; i < this.songLyric.length; i++) {
+            if(this.bgAudioManager.currentTime > this.songLyric[this.songLyric.length-1].time) {
+              this.lyricIndex = this.songLyric.length-1
+              break
+            }
+            if(this.bgAudioManager.currentTime > this.songLyric[i].time && this.bgAudioManager.currentTime < this.songLyric[i+1].time) {
+              this.lyricIndex = i
+            }
+          }
+          console.log(this.lyricIndex);
+        }, 500)
+      },
+      cancelLyricIndex() {
+        clearInterval(this.timer)
       }
     }
   }
@@ -220,7 +247,7 @@
   color: #6f6e73;
 }
 .detail-lyric-wrap {
-  
+  transition: .5s;
 }
 .detail-lyric-item {
   height: 82rpx;
