@@ -10,11 +10,11 @@
           <view></view>
         </view>
         <view class="detail-lyric">
-          <view class="detail-lyric-wrap" :style="{ transform : 'translateY('+ -(lyricIndex - 1) * 72 +'rpx)'}">
+          <view class="detail-lyric-wrap" :style="{ transform : 'translateY('+ -(lyricIndex - 1) * 82 +'rpx)'}">
 <!--            <view class="detail-lyric-item">
               测试文字测试文字测试文字
             </view> -->
-            <view class="detail-lyric-item" :class="{active: lyricIndex === index}" v-for="(item, index) in songLyric" :key="index">
+            <view class="detail-lyric-item" :class="{active: lyricIndex == index}" v-for="(item, index) in songLyric" :key="index">
               {{item.lyric }}
             </view>
           </view>
