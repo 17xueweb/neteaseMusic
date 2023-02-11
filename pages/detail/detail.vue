@@ -23,7 +23,7 @@
           <view class="detail-like-head">
             喜欢这首歌的人也听
           </view>
-          <view class="detail-like-item" v-for="(item, index) in songSimi" :key="index">
+          <view class="detail-like-item" v-for="(item, index) in songSimi" :key="index" @tap="handleToSimi(item.id)">
             <view class="detail-like-img">
               <image :src="item.album.picUrl"></image>
             </view>
@@ -99,9 +99,15 @@
     },
     onUnload() {
       this.cancelLyricIndex()
+      // #ifdef H5
+      this.bgAudioManager.destroy()
+      // #endif
     },
     onHide() {
       this.cancelLyricIndex()
+      // #ifdef H5
+      this.bgAudioManager.destroy()
+      // #endif
     },
     methods: {
       getMusic(songId) {
@@ -129,8 +135,19 @@
             this.songLyric = result
           }
           if(res[4][1].data.code === 200) {
+            // #ifdef MP-WEIXIN
             this.bgAudioManager = uni.getBackgroundAudioManager()
             this.bgAudioManager.title = this.songDetail.name
+            // #endif
+            
+            // #ifdef H5
+            if(!this.bgAudioManager) {
+              this.bgAudioManager = uni.createInnerAudioContext()
+            }
+            this.iconPlay = 'iconbofang1'
+            this.isPlayRotate = false
+            // #endif
+
             this.bgAudioManager.src = res[4][1].data.data[0].url || ''
             this.listenLyricIndex()
             this.bgAudioManager.onPlay(() => {
@@ -173,6 +190,9 @@
       },
       cancelLyricIndex() {
         clearInterval(this.timer)
+      },
+      handleToSimi(songId) {
+        this.getMusic(songId)
       }
     }
   }
