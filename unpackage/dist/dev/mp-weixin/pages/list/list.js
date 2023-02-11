@@ -276,7 +276,7 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopR
 //
 //
 //
-var _default = { data: function data() {return { playlist: { coverImgUrl: '', creator: { avatarUrl: '' }, trackCount: '' }, privileges: [], isLoading: true };}, onLoad: function onLoad(options) {var _this = this;console.log(options.listId);uni.showLoading({ title: '加载中...' });(0, _api.list)(options.listId).then(function (res) {if (res[1].data.code === 200) {_this.playlist = res[1].data.playlist;_this.privileges = res[1].data.privileges;_this.isLoading = false;uni.hideLoading();}});}, methods: { handleToDetail: function handleToDetail(songId) {uni.navigateTo({ url: '/pages/detail/detail?songId=' + songId });} } };exports.default = _default;
+var _default = { data: function data() {return { playlist: { coverImgUrl: '', creator: { avatarUrl: '' }, trackCount: '' }, privileges: [], isLoading: true };}, onLoad: function onLoad(options) {var _this = this;console.log(options.listId);uni.showLoading({ title: '加载中...' });(0, _api.list)(options.listId).then(function (res) {if (res[1].data.code === 200) {_this.playlist = res[1].data.playlist;_this.privileges = res[1].data.privileges;_this.$store.commit('INIT_TOPLISTIDS', res[1].data.playlist.trackIds);_this.isLoading = false;uni.hideLoading();}});}, methods: { handleToDetail: function handleToDetail(songId) {uni.navigateTo({ url: '/pages/detail/detail?songId=' + songId });} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

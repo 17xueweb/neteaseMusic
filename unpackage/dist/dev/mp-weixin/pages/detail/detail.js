@@ -504,8 +504,16 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 19);function _interopR
 //
 //
 //
-var _default = { data: function data() {return { songDetail: { al: { picUrl: '' } }, songSimi: [], songComment: [], songLyric: [], lyricIndex: 0, iconPlay: 'iconpause', isPlayRotate: true };}, onLoad: function onLoad(options) {// console.log(options.songId);
-    this.getMusic(options.songId);}, onUnload: function onUnload() {this.cancelLyricIndex();}, onHide: function onHide() {this.cancelLyricIndex();}, methods: { getMusic: function getMusic(songId) {var _this = this;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId), (0, _api.songLyric)(songId), (0, _api.songUrl)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code === 200) {_this.songComment = res[2][1].data.hotComments;}if (res[3][1].data.code === 200) {var lyric = res[3][1].data.lrc.lyric;var re = /\[([^\]]+)\]([^\[]+)/g;var result = [];lyric.replace(re, function ($0, $1, $2) {result.push({ "time": _this.formatTimeToSec($1), "lyric": $2 });});_this.songLyric = result;}if (res[4][1].data.code === 200) {_this.bgAudioManager = uni.getBackgroundAudioManager();_this.bgAudioManager.title = _this.songDetail.name;_this.bgAudioManager.src = res[4][1].data.data[0].url || '';_this.listenLyricIndex();_this.bgAudioManager.onPlay(function () {_this.iconPlay = 'iconpause';_this.isPlayRotate = true;
+var _default = { data: function data() {return { songDetail: { al: { picUrl: '' } }, songSimi: [], songComment: [], songLyric: [], lyricIndex: 0, iconPlay: 'iconpause', isPlayRotate: true, isLoading: true };}, onLoad: function onLoad(options) {// console.log(options.songId);
+    this.getMusic(options.songId);}, onUnload: function onUnload() {this.cancelLyricIndex();}, onHide: function onHide() {this.cancelLyricIndex();}, methods: { getMusic: function getMusic(songId) {var _this = this;this.$store.commit('NEXT_ID', songId);uni.showLoading({ title: "加载中..." });this.isLoading = true;Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId), (0, _api.songLyric)(songId), (0, _api.songUrl)(songId)]).then(function (res) {if (res[0][1].data.code === 200) {_this.songDetail = res[0][1].data.songs[0];}if (res[1][1].data.code === 200) {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code === 200) {_this.songComment = res[2][1].data.hotComments;}if (res[3][1].data.code === 200) {var lyric = res[3][1].data.lrc.lyric;var re = /\[([^\]]+)\]([^\[]+)/g;var result = [];lyric.replace(re, function ($0, $1, $2) {result.push({ "time": _this.formatTimeToSec($1), "lyric": $2 });});_this.songLyric = result;}if (res[4][1].data.code === 200) {_this.bgAudioManager = uni.getBackgroundAudioManager();_this.bgAudioManager.title = _this.songDetail.name;
+
+
+
+          _this.bgAudioManager.src = res[4][1].data.data[0].url || '';
+          _this.listenLyricIndex();
+          _this.bgAudioManager.onPlay(function () {
+            _this.iconPlay = 'iconpause';
+            _this.isPlayRotate = true;
             _this.listenLyricIndex();
           });
           _this.bgAudioManager.onPause(function () {
@@ -513,7 +521,15 @@ var _default = { data: function data() {return { songDetail: { al: { picUrl: '' 
             _this.isPlayRotate = false;
             _this.cancelLyricIndex();
           });
+
+          // 监听播放结束
+          _this.bgAudioManager.onEnded(function () {
+            // 从store获取下一首id 传入getMusic
+            _this.getMusic(_this.$store.state.nextId);
+          });
         }
+        _this.isLoading = false;
+        uni.hideLoading();
       });
     },
     formatTimeToSec: function formatTimeToSec(value) {

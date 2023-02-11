@@ -22,6 +22,7 @@ export function topList() {
   })
 }
 
+// http://localhost:3000/playlist/detail?id=19723756
 export function list(listId) {
   return uni.request({
     url: `${baseUrl}/playlist/detail?id=${listId}`,

@@ -2,6 +2,7 @@ import App from './App'
 
 // #ifndef VUE3
 import Vue from 'vue'
+import store from 'store/index.js'
 Vue.config.productionTip = false
 App.mpType = 'app'
 
@@ -22,7 +23,8 @@ Vue.filter('formatTime', function(value) {
   return date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日';
 })
 const app = new Vue({
-    ...App
+    ...App,
+    store
 })
 app.$mount()
 // #endif
