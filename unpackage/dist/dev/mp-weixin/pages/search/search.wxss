@@ -76,4 +76,24 @@
   flex: 1;
   font-size: 26rpx;
 }
+.search-history {
+  margin: 0 30rpx;
+  font-size: 26rpx;
+}
+.search-history-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36rpx;
+}
+.search-history-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.search-history-list view {
+  padding: 16rpx 28rpx;
+  border-radius: 40rpx;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+  background-color: #f7f7f7;
+}
 
