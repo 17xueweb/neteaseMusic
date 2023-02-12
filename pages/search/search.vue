@@ -5,23 +5,16 @@
       <scroll-view scroll-y="true">
         <view class="search-search">
           <text class="iconfont iconsearch"></text>
-          <input type="text" placeholder="搜索歌曲"  v-model="searchWord"/>
+          <input type="text" placeholder="搜索歌曲"  v-model="searchWord" @confirm="handleToSearch(searchWord)"/>
           <text class="iconfont iconguanbi"></text>
         </view>
         <view class="search-history">
           <view class="search-history-head">
             <text>历史记录</text>
-            <text class="iconfont iconlajitong"></text>
+            <text class="iconfont iconlajitong" @tap="handleToClear"></text>
           </view>
           <view class="search-history-list">
-            <view>少年</view>
-            <view>测试歌曲</view>
-            <view>少年</view>
-            <view>测试歌曲</view>
-            <view>少年</view>
-            <view>测试歌曲</view>
-            <view>少年</view>
-            <view>测试歌曲</view>
+            <view v-for="(item, index) in searchHistory" :key="index" @tap="handleToWord(item)">{{item}}</view>
           </view>
         </view>
         <view class="search-hot">
@@ -60,7 +53,8 @@
     data() {
       return {
         searchHot: [],
-        searchWord: ''
+        searchWord: '',
+        searchHistory: []
       }
     },
     onLoad() {
@@ -69,10 +63,36 @@
           this.searchHot = res[1].data.data
         }
       })
+      uni.getStorage({
+        key: "searchHistory",
+        success: (res) => {
+          this.searchHistory = res.data
+        }
+      })
     },
     methods: {
       handleToWord(word) {
         this.searchWord = word
+      },
+      handleToSearch(word) {
+        this.searchHistory.unshift(word)
+        this.searchHistory = [...new Set(this.searchHistory)]
+        if(this.searchHistory.length > 10) {
+          this.searchHistory.length = 10
+        }
+        uni.setStorage({
+          key: 'searchHistory',
+          data: this.searchHistory
+        })
+      },
+      handleToClear() {
+        uni.clearStorage({
+          key: "searchHistory",
+          success: (res)=> {
+            this.searchHistory = []
+          }
+        })
+        
       }
     }
   }
