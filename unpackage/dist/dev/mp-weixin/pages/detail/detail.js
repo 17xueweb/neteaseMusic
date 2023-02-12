@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
 var _default =
 {
   name: "musichead",
-  props: ['title', 'icon', 'color'],
+  props: ['title', 'icon', 'color', 'iconblack'],
   data: function data() {
     return {};
 
