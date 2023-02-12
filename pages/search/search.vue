@@ -24,6 +24,57 @@
             <view>测试歌曲</view>
           </view>
         </view>
+        <view class="search-hot">
+          <view class="search-hot-head">
+            热搜榜
+          </view>
+          
+          <view class="search-hot-item">
+            <view class="search-hot-top">
+              1
+            </view>
+            <view class="search-hot-word">
+              <view class="">
+                少年 <image src="../../static/dujia.png" mode="aspectFit"></image>
+              </view>
+              <view class="">
+                ”少年“这个词实在是太美了
+              </view>
+            </view>
+            <text class="search-hot-count">2968644</text>
+          </view>
+          
+          <view class="search-hot-item">
+            <view class="search-hot-top">
+              1
+            </view>
+            <view class="search-hot-word">
+              <view class="">
+                少年 <image src="../../static/dujia.png" mode="aspectFit"></image>
+              </view>
+              <view class="">
+                ”少年“这个词实在是太美了
+              </view>
+            </view>
+             <text class="search-hot-count">2968644</text>
+          </view>
+          
+          <view class="search-hot-item">
+            <view class="search-hot-top">
+              1
+            </view>
+            <view class="search-hot-word">
+              <view class="">
+                少年 <image src="../../static/dujia.png" mode="aspectFit"></image>
+              </view>
+              <view class="">
+                ”少年“这个词实在是太美了
+              </view>
+            </view>
+            <text class="search-hot-count">2968644</text>
+          </view>
+          
+        </view>
       </scroll-view>
     </view>
   </view>
@@ -52,7 +103,7 @@
   display: flex;
   align-items: center;
   height: 70rpx;
-  margin: 70rpx 30rpx 30rpx 30rpx;
+  margin: 70rpx 30rpx 50rpx 30rpx;
   background-color: #f7f7f7;
   border-radius: 50rpx;
 }
@@ -64,7 +115,7 @@
   font-size: 26rpx;
 }
 .search-history {
-  margin: 0 30rpx;
+  margin: 0rpx 30rpx 50rpx 30rpx;
   font-size: 26rpx;
 }
 .search-history-head {
@@ -83,5 +134,40 @@
   margin-right: 30rpx;
   margin-bottom: 30rpx;
   background-color: #f7f7f7;
+}
+.search-hot {
+  margin: 0 30rpx;
+  font-size: 26rpx;
+}
+.search-hot-head {
+  margin-bottom: 36rpx;
+}
+.search-hot-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 58rpx;
+}
+.search-hot-top {
+  color: #fb2222;
+  width: 60rpx;
+  margin-left: 8rpx;
+}
+.search-hot-word {
+  flex: 1;
+}
+.search-hot-word view:nth-child(1) {
+  font-size: 30rpx;
+  color: black;
+}
+.search-hot-word view:nth-child(1) {
+  font-size: 24rpx;
+  color: #878787;
+}
+.search-hot-word image {
+  width: 48rpx;
+  height: 22rpx;
+}
+.search-hot-count {
+  color: #878787;
 }
 </style>
