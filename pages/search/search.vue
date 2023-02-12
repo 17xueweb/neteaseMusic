@@ -6,37 +6,78 @@
         <view class="search-search">
           <text class="iconfont iconsearch"></text>
           <input type="text" placeholder="搜索歌曲"  v-model="searchWord" @confirm="handleToSearch(searchWord)"/>
-          <text class="iconfont iconguanbi"></text>
+          <text v-show="searchType != 1" class="iconfont iconguanbi"></text>
         </view>
-        <view class="search-history">
-          <view class="search-history-head">
-            <text>历史记录</text>
-            <text class="iconfont iconlajitong" @tap="handleToClear"></text>
-          </view>
-          <view class="search-history-list">
-            <view v-for="(item, index) in searchHistory" :key="index" @tap="handleToWord(item)">{{item}}</view>
-          </view>
-        </view>
-        <view class="search-hot">
-          <view class="search-hot-head">
-            热搜榜
-          </view>
-          
-          <view class="search-hot-item" v-for="(item, index) in searchHot" :key="index" @tap="handleToWord(item.searchWord)">
-            <view class="search-hot-top">
-              {{index + 1}}
+        <block v-if="searchType == 1">
+          <view class="search-history">
+            <view class="search-history-head">
+              <text>历史记录</text>
+              <text class="iconfont iconlajitong" @tap="handleToClear"></text>
             </view>
-            <view class="search-hot-word">
-              <view class="">
-                {{item.searchWord}} <image :src="item.iconUrl" mode="aspectFit"></image>
-              </view>
-              <view class="">
-                {{ item.content }}
-              </view>
+            <view class="search-history-list">
+              <view v-for="(item, index) in searchHistory" :key="index" @tap="handleToWord(item)">{{item}}</view>
             </view>
-            <text class="search-hot-count">{{item.score}}</text>
           </view>
-        </view>
+          <view class="search-hot">
+            <view class="search-hot-head">
+              热搜榜
+            </view>
+            
+            <view class="search-hot-item" v-for="(item, index) in searchHot" :key="index" @tap="handleToWord(item.searchWord)">
+              <view class="search-hot-top">
+                {{index + 1}}
+              </view>
+              <view class="search-hot-word">
+                <view class="">
+                  {{item.searchWord}} <image :src="item.iconUrl" mode="aspectFit"></image>
+                </view>
+                <view class="">
+                  {{ item.content }}
+                </view>
+              </view>
+              <text class="search-hot-count">{{item.score}}</text>
+            </view>
+          </view>
+        </block>
+        
+        <block v-else-if="searchType == 2">
+          <view class="search-result">
+            <view class="search-result-item">
+              <view class="search-result-word">
+                <view class="">
+                  少年
+                </view>
+                <view class="">
+                  许巍 - 爱如少年
+                </view>
+              </view>
+              <text class="iconfont iconbofang"></text>
+            </view>
+            <view class="search-result-item">
+              <view class="search-result-word">
+                <view class="">
+                  少年
+                </view>
+                <view class="">
+                  许巍 - 爱如少年
+                </view>
+              </view>
+              <text class="iconfont iconbofang"></text>
+            </view>
+            <view class="search-result-item">
+              <view class="search-result-word">
+                <view class="">
+                  少年
+                </view>
+                <view class="">
+                  许巍 - 爱如少年
+                </view>
+              </view>
+              <text class="iconfont iconbofang"></text>
+            </view>
+          </view>
+        </block>
+        
       </scroll-view>
     </view>
   </view>
@@ -54,7 +95,8 @@
       return {
         searchHot: [],
         searchWord: '',
-        searchHistory: []
+        searchHistory: [],
+        searchType: 2
       }
     },
     onLoad() {
@@ -169,5 +211,32 @@
 }
 .search-hot-count {
   color: #878787;
+}
+.search-result {
+  border-top: 2rpx solid #e4e4e4;
+  padding: 30rpx;
+}
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 30rpx;
+  margin-bottom: 30rpx;
+  border-bottom: 2rpx solid #e4e4e4;
+}
+.search-result-word {
+  
+}
+.search-result-word view:nth-child(1) {
+  font-size: 28rpx;
+  color: #235790;
+  margin-bottom: 12rpx;
+}
+.search-result-word view:nth-child(2) {
+  font-size: 22rpx;
+  color: #898989;
+}
+.search-result-item text {
+  font-size: 50rpx;
 }
 </style>
