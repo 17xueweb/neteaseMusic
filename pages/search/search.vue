@@ -5,7 +5,7 @@
       <scroll-view scroll-y="true">
         <view class="search-search">
           <text class="iconfont iconsearch"></text>
-          <input type="text" placeholder="搜索歌曲"  v-model="searchWord" @confirm="handleToSearch(searchWord)"/>
+          <input type="text" placeholder="搜索歌曲"  v-model="searchWord" @confirm="handleToSearch(searchWord)" @input="handleToSuggest"/>
           <text v-show="searchType != 1" class="iconfont iconguanbi" @tap="handleToClose"></text>
         </view>
         <block v-if="searchType == 1">
@@ -53,7 +53,16 @@
               </view>
               <text class="iconfont iconbofang"></text>
             </view>
-
+          </view>
+        </block>
+        <block v-else-if="searchType == 3">
+          <view class="search-suggest">
+            <view class="search-suggest-head">
+              搜索”{{ searchWord }}“
+            </view>
+            <view class="search-suggest-item" v-for="(item, index) in searchSuggest" :key="index" @tap="handleToWord(item.keyword)">
+              <text class="iconfont iconsearch"></text>{{item.keyword}}
+            </view>
           </view>
         </block>
         
@@ -76,7 +85,8 @@
         searchWord: '',
         searchHistory: [],
         searchType: 1,
-        searchlist: []
+        searchlist: [],
+        searchSuggest: []
       }
     },
     onLoad() {
@@ -95,6 +105,7 @@
     methods: {
       handleToWord(word) {
         this.searchWord = word
+        this.handleToSearch(word)
       },
       handleToSearch(word) {
         this.searchHistory.unshift(word)
@@ -132,6 +143,19 @@
         uni.navigateTo({
           url: '/pages/detail/detail?songId=' + songId,
         });
+      },
+      handleToSuggest(event) {
+        let value = event.detail.value;
+        if(!value) {
+          this.searchType = 1
+          return
+        }
+        searchSuggest(value).then((res)=> {
+          if(res[1].data.code === 200) {
+            this.searchSuggest = res[1].data.result.allMatch
+            this.searchType = 3
+          }
+        })
       }
     }
   }
@@ -235,5 +259,24 @@
 }
 .search-result-item text {
   font-size: 50rpx;
+}
+.search-suggest {
+  border-top: 2rpx solid #e4e4e4;
+  padding: 30rpx;
+  font-size: 26rpx;
+}
+.search-suggest-head {
+  color: #4574a5;
+  margin-bottom: 74rpx;
+}
+.search-suggest-item {
+  color: #5d5d5d;
+  margin-bottom: 74rpx;
+}
+.search-suggest-item text {
+  color: #bdbdbd;
+  margin-right: 28rpx;
+  position: relative;
+  top: 2rpx;
 }
 </style>
