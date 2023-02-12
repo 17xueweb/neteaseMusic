@@ -6,7 +6,7 @@
         <view class="search-search">
           <text class="iconfont iconsearch"></text>
           <input type="text" placeholder="搜索歌曲"  v-model="searchWord" @confirm="handleToSearch(searchWord)"/>
-          <text v-show="searchType != 1" class="iconfont iconguanbi"></text>
+          <text v-show="searchType != 1" class="iconfont iconguanbi" @tap="handleToClose"></text>
         </view>
         <block v-if="searchType == 1">
           <view class="search-history">
@@ -42,39 +42,18 @@
         
         <block v-else-if="searchType == 2">
           <view class="search-result">
-            <view class="search-result-item">
+            <view class="search-result-item" v-for="(item, index) in searchlist" :key="index" @tap="handleToDetail(item.id)">
               <view class="search-result-word">
                 <view class="">
-                  少年
+                  {{item.name}}
                 </view>
                 <view class="">
-                  许巍 - 爱如少年
+                  {{item.artists[0].name}} - {{ item.album.name }}
                 </view>
               </view>
               <text class="iconfont iconbofang"></text>
             </view>
-            <view class="search-result-item">
-              <view class="search-result-word">
-                <view class="">
-                  少年
-                </view>
-                <view class="">
-                  许巍 - 爱如少年
-                </view>
-              </view>
-              <text class="iconfont iconbofang"></text>
-            </view>
-            <view class="search-result-item">
-              <view class="search-result-word">
-                <view class="">
-                  少年
-                </view>
-                <view class="">
-                  许巍 - 爱如少年
-                </view>
-              </view>
-              <text class="iconfont iconbofang"></text>
-            </view>
+
           </view>
         </block>
         
@@ -96,7 +75,8 @@
         searchHot: [],
         searchWord: '',
         searchHistory: [],
-        searchType: 2
+        searchType: 1,
+        searchlist: []
       }
     },
     onLoad() {
@@ -126,6 +106,7 @@
           key: 'searchHistory',
           data: this.searchHistory
         })
+        this.getSearchList(word)
       },
       handleToClear() {
         uni.clearStorage({
@@ -134,7 +115,23 @@
             this.searchHistory = []
           }
         })
-        
+      },
+      getSearchList(word) {
+        searchWord(word).then((res) => {
+          if(res[1].data.code === 200) {
+            this.searchlist = res[1].data.result.songs
+            this.searchType = 2
+          }
+        })
+      },
+      handleToClose() {
+        this.searchWord = ''
+        this.searchType = 1
+      },
+      handleToDetail(songId) {
+        uni.navigateTo({
+          url: '/pages/detail/detail?songId=' + songId,
+        });
       }
     }
   }

@@ -221,27 +221,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 __webpack_require__(/*! @/common/iconfont.css */ 20);
 var _api = __webpack_require__(/*! ../../common/api.js */ 21);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! @/components/musichead/musichead.vue */ 31));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
@@ -253,7 +232,8 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 21);function _toConsum
       searchHot: [],
       searchWord: '',
       searchHistory: [],
-      searchType: 2 };
+      searchType: 1,
+      searchlist: [] };
 
   },
   onLoad: function onLoad() {var _this = this;
@@ -283,6 +263,7 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 21);function _toConsum
         key: 'searchHistory',
         data: this.searchHistory });
 
+      this.getSearchList(word);
     },
     handleToClear: function handleToClear() {var _this2 = this;
       uni.clearStorage({
@@ -291,6 +272,22 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 21);function _toConsum
           _this2.searchHistory = [];
         } });
 
+    },
+    getSearchList: function getSearchList(word) {var _this3 = this;
+      (0, _api.searchWord)(word).then(function (res) {
+        if (res[1].data.code === 200) {
+          _this3.searchlist = res[1].data.result.songs;
+          _this3.searchType = 2;
+        }
+      });
+    },
+    handleToClose: function handleToClose() {
+      this.searchWord = '';
+      this.searchType = 1;
+    },
+    handleToDetail: function handleToDetail(songId) {
+      uni.navigateTo({
+        url: '/pages/detail/detail?songId=' + songId });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
