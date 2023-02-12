@@ -65,12 +65,14 @@
 <script>
   import '@/common/iconfont.css';
   import musichead from '@/components/musichead/musichead.vue'
+  import mForSkeleton from "@/components/m-for-skeleton/m-for-skeleton"
   import {
     topList
   } from '../../common/api.js'
   export default {
     components: {
-      musichead
+      musichead,
+      mForSkeleton
     },
     data() {
       return {

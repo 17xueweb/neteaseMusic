@@ -230,6 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__(/*! @/common/iconfont.css */ 20);
 
+
 var _api = __webpack_require__(/*! ../../common/api.js */ 21); //
 //
 //
@@ -294,7 +295,7 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 21); //
 //
 //
 //
-var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! @/components/musichead/musichead.vue */ 31));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { musichead: musichead }, data: function data() {return { topList: [] };}, onLoad: function onLoad() {var _this = this;(0, _api.topList)().then(function (res) {if (res.length) {// second文字太长，截取一部分
+var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! @/components/musichead/musichead.vue */ 31));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mForSkeleton = function mForSkeleton() {__webpack_require__.e(/*! require.ensure | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/m-for-skeleton/m-for-skeleton */ 63));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { musichead: musichead, mForSkeleton: mForSkeleton }, data: function data() {return { topList: [] };}, onLoad: function onLoad() {var _this = this;(0, _api.topList)().then(function (res) {if (res.length) {// second文字太长，截取一部分
         res.forEach(function (item) {item.tracks.forEach(function (tracksItem) {if (tracksItem.first.length + tracksItem.second.length > 20) {tracksItem.second = tracksItem.second.substr(0, 5) + '...';}});}); // debugger
         _this.topList = res;}console.log(res);});}, methods: { handleToList: function handleToList(listId) {uni.navigateTo({ url: "/pages/list/list?listId=" + listId });}, handleToSearch: function handleToSearch() {uni.navigateTo({ url: "/pages/search/search" });} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
