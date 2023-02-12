@@ -10542,7 +10542,7 @@ module.exports = index_cjs;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;exports.songDetail = songDetail;exports.songSimi = songSimi;exports.songComment = songComment;exports.songLyric = songLyric;exports.songUrl = songUrl;var _config = __webpack_require__(/*! ./config.js */ 22);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;exports.songDetail = songDetail;exports.songSimi = songSimi;exports.songComment = songComment;exports.songLyric = songLyric;exports.songUrl = songUrl;exports.searchHot = searchHot;exports.searchWord = searchWord;exports.searchSuggest = searchSuggest;var _config = __webpack_require__(/*! ./config.js */ 22);
 
 function topList() {
   var listIds = ['19723756', '3779629', '2884035', '3778678'];
@@ -10607,6 +10607,28 @@ function songLyric(songId) {
 function songUrl(songId) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/song/url?id=").concat(songId),
+    method: 'GET' });
+
+}
+
+// http://localhost:3000/search/hot/detail
+function searchHot() {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/search/hot/detail"),
+    method: 'GET' });
+
+}
+// http://localhost:3000/search?keywords=少年
+function searchWord(word) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/search?keywords=").concat(word),
+    method: 'GET' });
+
+}
+// http://localhost:3000/search/suggest?keywords=少年&type=mobile
+function searchSuggest(word) {
+  return uni.request({
+    url: "".concat(_config.baseUrl, "/search/suggest?keywords=").concat(word, "&type=mobile"),
     method: 'GET' });
 
 }

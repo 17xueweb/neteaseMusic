@@ -208,48 +208,29 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-__webpack_require__(/*! @/common/iconfont.css */ 20);var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! @/components/musichead/musichead.vue */ 31));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+__webpack_require__(/*! @/common/iconfont.css */ 20);
+var _api = __webpack_require__(/*! ../../common/api.js */ 21);var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! @/components/musichead/musichead.vue */ 31));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     musichead: musichead },
 
   data: function data() {
-    return {};
-
+    return {
+      searchHot: [],
+      searchWord: '' };
 
   },
-  methods: {} };exports.default = _default;
+  onLoad: function onLoad() {var _this = this;
+    (0, _api.searchHot)().then(function (res) {
+      if (res[1].data.code === 200) {
+        _this.searchHot = res[1].data.data;
+      }
+    });
+  },
+  methods: {
+    handleToWord: function handleToWord(word) {
+      this.searchWord = word;
+    } } };exports.default = _default;
 
 /***/ }),
 

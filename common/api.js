@@ -67,3 +67,24 @@ export function songUrl(songId) {
   });
 }
 
+// http://localhost:3000/search/hot/detail
+export function searchHot() {
+  return uni.request({
+    url: `${baseUrl}/search/hot/detail`,
+    method: 'GET'
+  });
+} 
+// http://localhost:3000/search?keywords=少年
+export function searchWord(word) {
+  return uni.request({
+    url: `${baseUrl}/search?keywords=${word}`,
+    method: 'GET'
+  });
+} 
+// http://localhost:3000/search/suggest?keywords=少年&type=mobile
+export function searchSuggest(word) {
+  return uni.request({
+    url: `${baseUrl}/search/suggest?keywords=${word}&type=mobile`,
+    method: 'GET'
+  });
+} 

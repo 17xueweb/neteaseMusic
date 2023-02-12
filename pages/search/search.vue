@@ -5,7 +5,7 @@
       <scroll-view scroll-y="true">
         <view class="search-search">
           <text class="iconfont iconsearch"></text>
-          <input type="text" placeholder="搜索歌曲" />
+          <input type="text" placeholder="搜索歌曲"  v-model="searchWord"/>
           <text class="iconfont iconguanbi"></text>
         </view>
         <view class="search-history">
@@ -29,51 +29,20 @@
             热搜榜
           </view>
           
-          <view class="search-hot-item">
+          <view class="search-hot-item" v-for="(item, index) in searchHot" :key="index" @tap="handleToWord(item.searchWord)">
             <view class="search-hot-top">
-              1
+              {{index + 1}}
             </view>
             <view class="search-hot-word">
               <view class="">
-                少年 <image src="../../static/dujia.png" mode="aspectFit"></image>
+                {{item.searchWord}} <image :src="item.iconUrl" mode="aspectFit"></image>
               </view>
               <view class="">
-                ”少年“这个词实在是太美了
+                {{ item.content }}
               </view>
             </view>
-            <text class="search-hot-count">2968644</text>
+            <text class="search-hot-count">{{item.score}}</text>
           </view>
-          
-          <view class="search-hot-item">
-            <view class="search-hot-top">
-              1
-            </view>
-            <view class="search-hot-word">
-              <view class="">
-                少年 <image src="../../static/dujia.png" mode="aspectFit"></image>
-              </view>
-              <view class="">
-                ”少年“这个词实在是太美了
-              </view>
-            </view>
-             <text class="search-hot-count">2968644</text>
-          </view>
-          
-          <view class="search-hot-item">
-            <view class="search-hot-top">
-              1
-            </view>
-            <view class="search-hot-word">
-              <view class="">
-                少年 <image src="../../static/dujia.png" mode="aspectFit"></image>
-              </view>
-              <view class="">
-                ”少年“这个词实在是太美了
-              </view>
-            </view>
-            <text class="search-hot-count">2968644</text>
-          </view>
-          
         </view>
       </scroll-view>
     </view>
@@ -83,17 +52,28 @@
 <script>
   import musichead from '@/components/musichead/musichead.vue'
   import '@/common/iconfont.css';
+  import { searchHot, searchWord, searchSuggest} from '../../common/api.js'
   export default {
     components: {
       musichead
     },
     data() {
       return {
-        
+        searchHot: [],
+        searchWord: ''
       }
     },
+    onLoad() {
+      searchHot().then((res) => {
+        if(res[1].data.code === 200) {
+          this.searchHot = res[1].data.data
+        }
+      })
+    },
     methods: {
-      
+      handleToWord(word) {
+        this.searchWord = word
+      }
     }
   }
 </script>
@@ -159,7 +139,7 @@
   font-size: 30rpx;
   color: black;
 }
-.search-hot-word view:nth-child(1) {
+.search-hot-word view:nth-child(2) {
   font-size: 24rpx;
   color: #878787;
 }

@@ -120,7 +120,7 @@
   font-size: 30rpx;
   color: black;
 }
-.search-hot-word view:nth-child(1) {
+.search-hot-word view:nth-child(2) {
   font-size: 24rpx;
   color: #878787;
 }
